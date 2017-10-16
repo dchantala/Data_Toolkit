@@ -5,7 +5,7 @@
 * 			Copyright 2017 RTI International
 * Note		An earlier version of tk_codebook.sas was released under the name of proc_codebook.sas (2010, Jim Terry & Kim Chantala, UNC Chapel Hill NC).;
 *                 
-* version	2017.09.15                                                     
+* version	2017.10.16                                                     
 * usage:                                                                                 
 *		%tk_codebook(
 			lib=SAS_data,
@@ -500,8 +500,8 @@
 		length mean_char $ 15;
 		length type_length $9;
 
-		*range=strip(range);
-		*desc=strip(desc);
+		/*range=strip(range);
+		*desc=strip(desc);*/
 		type_length= compress(type)||' '||compress(length);
 
 		if format =: 'MMDDYY' and has_freq_results ne 1 then
@@ -545,8 +545,8 @@
 				substr(range,7,5) = put(max,time5.);
 			end;
 
-		if n = 0 then
-			range = " ";
+		/*if n = 0 then
+			range = " ";*/
 
 		if frequency = . then
 			do;
