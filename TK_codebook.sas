@@ -347,10 +347,31 @@
 
 	data _cb_freqs_;
 	set _cb_freqs_;
+/*         %IF %UPCASE(%SCAN(table, 2, ' ')) EQ "PERCENT"  %THEN
+         %DO;
+           IF UPCASE(SCAN(table, 2, ' ')) EQ "PERCENT"  AND ~MISSING(percent2) THEN percent = percent2 ;
+         %END ;
+
+         %IF %UPCASE(%SCAN(table, 2, ' ')) EQ "FREQUENCY" %THEN
+         %DO ;
+           IF UPCASE(SCAN(table, 2, ' ')) EQ "FREQUENCY" AND ~MISSING(frequency2) THEN frequency = frequency2 ;
+         %END ;
+
+         %IF %UPCASE(%SCAN(table, 2, ' ')) EQ "CUMFREQUENCY" %THEN
+         %DO ;
+           IF UPCASE(SCAN(table, 2, ' ')) EQ "CUMFREQUENCY" AND ~MISSING(cumfrequency2) THEN cumfrequency = cumfrequency2 ;
+         %END ;
+
+         %IF %UPCASE(%SCAN(table,2,' '))  EQ  "CUMPERCENT" %THEN
+         %DO ;
+           IF UPCASE(SCAN(table,2,' '))  EQ  "CUMPERCENT" AND ~MISSING(cumpercent2) THEN cumpercent = cumpercent2 ;
+         %END ;
+*/
 	if upcase(scan(table,2,' ')) = "PERCENT" and not missing(percent2) then percent=percent2;
 	else if upcase(scan(table,2,' ')) = "FREQUENCY" and not missing(frequency2) then frequency=frequency2;
 	else if upcase(scan(table,2,' ')) = "CUMFREQUENCY" and not missing(cumfrequency2) then cumfrequency=cumfrequency2;
 	if upcase(scan(table,2,' ')) = "CUMPERCENT" and not missing(cumpercent2) then cumpercent=cumpercent2;
+
 	format frequency cumfrequency best8.;
 	format percent cumpercent 6.2 ;
 	run;
@@ -825,14 +846,14 @@
 				column order name label type_length order_flag range cnt desc frequency percent ;
 				define order / group noprint;
 				define name /group style(column)=[width=15%];
-				define label /group flow style(column)=[width=30%];
+				define label /group flow style(column)=[width=22%];
 				define type_length / group center style(column)=[width=5.0%];
 				define order_flag/ order noprint;
 				define range / group flow center style(column)=[width=10.0%] style(column)={tagattr="format:@"};
 				define cnt / group noprint;
 				define desc  / group center order flow  style(column)=[width=10.5%] style(column)={tagattr="format:@"};
-				define frequency / analysis style(column)=[width=5.8%] format=comma10.0;
-				define percent / analysis style(column)=[width=4.6%];
+				define frequency / analysis style(column)=[width=9.8%] format=comma10.0;
+				define percent / analysis style(column)=[width=8.6%];
 			%end;
 		%else
 			%do;
